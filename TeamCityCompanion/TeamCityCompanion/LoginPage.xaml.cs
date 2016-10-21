@@ -13,11 +13,18 @@ namespace TeamCityCompanion
         public LoginPage()
         {
             InitializeComponent();
+            IsGuest.Toggled += IsGuest_Toggled;
+            LoginButton.Clicked += async (s, e) =>
+            {
+                AccountManager.Current.Login(Server.Text, Username.Text, Password.Text, IsGuest.IsToggled);
+                await Navigation.PushModalAsync(new Projects());
+            };
         }
 
-        void OnLogin()
+        private void IsGuest_Toggled(object sender, ToggledEventArgs e)
         {
-            AccountManager.Current.Login(Username.Text, Password.Text);
+            Username.IsEnabled = !e.Value;
+            Password.IsEnabled = !e.Value;
         }
     }
 }
