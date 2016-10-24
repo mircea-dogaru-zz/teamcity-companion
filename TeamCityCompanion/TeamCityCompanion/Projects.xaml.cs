@@ -25,14 +25,11 @@ namespace TeamCityCompanion
             _teamCityService = DependencyService.Get<ITeamCityService>();
 
             ProjectsList.ItemsSource = ProjectsCollection;
+            ProjectsList.ItemSelected += ProjectsList_ItemSelected;
             Filter.TextChanged += Filter_TextChanged;
 
+            // TODO: This is synchronous loading. Not good. Refactor to make it asynchronous
             RefreshProjectList();
-        }
-
-        private void Filter_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            FilterProjects(e.NewTextValue);
         }
 
         public void FilterProjects(string text)
@@ -56,6 +53,18 @@ namespace TeamCityCompanion
             {
                 ProjectsCollection.Add(project);
             }
+        }
+
+        private async void ProjectsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var projectDetailsPage = new ProjectDetails { Project = ((ListView)sender).SelectedItem as Project };
+
+            await Navigation.PushAsync(projectDetailsPage);
+        }
+
+        private void Filter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterProjects(e.NewTextValue);
         }
     }
 }

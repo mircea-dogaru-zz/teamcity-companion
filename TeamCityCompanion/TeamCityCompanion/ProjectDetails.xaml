@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeamCityCompanion.ProjectDetails">
+  <ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="20, 40, 20, 20"
+                Android="20, 20, 20, 20"
+                WinPhone="20, 20, 20, 20" />
+  </ContentPage.Padding>
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Orientation="Vertical"
+                     Spacing="15">
+        <Label Text="{Binding Project.Name}"></Label>
+        <Label Text="{Binding Project.Description}"></Label>
+        <ListView x:Name="Builds" ItemsSource="{Binding BuildTypeCollection}">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell Height="200">
+                <StackLayout BackgroundColor="#eee" Orientation="Vertical">
+                  <StackLayout Orientation="Vertical">
+                    <Label Text="{Binding Name}" TextColor="#f35e20"  />
+                    <Label Text="{Binding Description}" TextColor="#503026"  />
+                    <Label Text="{Binding LatestBuild.Number}" TextColor="#503026"  />
+                    <Label Text="{Binding LatestBuild.Status}" TextColor="#503026"  />
+                    <Label Text="{Binding LatestBuild.State}" TextColor="#503026"  />
+                  </StackLayout>
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

@@ -15,16 +15,18 @@
                      Orientation="Vertical"
                      Spacing="15">
             <Label Text="TeamCity Build Server:" />
-            <Entry x:Name="Server" Text="" Placeholder="Your TeamCity server" />
+            <Entry x:Name="Server" Text="http://buildserver.red-gate.com" Placeholder="Your TeamCity server" />
           
             <Label Text="Username:" />
             <Entry x:Name="Username" Placeholder="Your TeamCity username" />
 
             <Label Text="Password:" />
             <Entry x:Name="Password" Placeholder="Your TeamCity password" IsPassword="True" />
-
-            <Label Text="Guest login" HorizontalOptions="Start" />
-            <Switch x:Name="IsGuest" HorizontalOptions="End"></Switch>
+            
+            <StackLayout Orientation="Horizontal">
+              <Label Text="Guest login" HorizontalOptions="StartAndExpand" />
+              <Switch x:Name="IsGuest" HorizontalOptions="End"></Switch>
+            </StackLayout>
             
             <Button x:Name="LoginButton" Text="Login" />
         </StackLayout>
